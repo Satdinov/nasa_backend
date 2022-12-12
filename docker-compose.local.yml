@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+  postgres:
+    container_name: nasa.postgres
+    image: postgres:13.2
+    volumes:
+      - ./docker_volumes/staging/psql-data/:/var/lib/postgresql/data
+    env_file:
+      - .envs
+    ports:
+      - '5495:5432'
+    networks:
+      - nasa_backend_local
+    logging:
+      options:
+        max-size: 10m
+
+networks:
+  nasa_backend_local:
+    driver: bridge
